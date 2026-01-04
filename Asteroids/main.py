@@ -1,6 +1,5 @@
 import pygame
-from constants.py import SCREEN_WIDTH
-from constants.py import SCREEN_HEIGHT
+from constants.py import
 def main():
     print("Starting Asteroids with pygame version: VERSION")
     print("Screen width: 1280")
