@@ -27,7 +27,6 @@ def log_state():
     if _frame_count % _FPS != 0:
         return
 
-
     now = datetime.now()
 
     frame = inspect.currentframe()
