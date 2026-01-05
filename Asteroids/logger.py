@@ -24,6 +24,8 @@ def log_state():
 
     # Take a snapshot approx. once per second
     _frame_count += 1
+    if _frame_count % _FPS != 0:
+    return
 
 
     now = datetime.now()
