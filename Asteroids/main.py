@@ -11,6 +11,10 @@ def main():
     dt = 0
     running = True
 
+    # Timer starten
+    import time
+    start_time = time.time()
+
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -27,6 +31,10 @@ def main():
 
         # FPS begrenzen & Delta Time berechnen
         dt = clock.tick(60) / 1000
+
+        # Stoppe das Spiel erst nach mindestens 3 Sekunden
+        if time.time() - start_time > 4:  # 4 Sekunden, um sicher zu gehen
+            running = False
 
     pygame.quit()
 
