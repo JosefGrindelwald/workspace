@@ -16,21 +16,17 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     while running:
-        # Event handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
         log_state()
 
-        # Clear screen
-        screen.fill((0, 0, 0))  # black
-
-        # Update display
+        screen.fill((0, 0, 0))
         pygame.display.flip()
 
-        # Cap frame rate
-        dt = clock.tick(60) / 1000 
+        # FPS begrenzen & Delta Time berechnen
+        dt = clock.tick(60) / 1000
 
     pygame.quit()
 
