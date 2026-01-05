@@ -8,6 +8,7 @@ def main():
     pygame.display.set_caption("Asteroids")
 
     clock = pygame.time.Clock()
+    dt = 0
     running = True
 
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -30,6 +31,8 @@ def main():
 
         # Cap frame rate
         clock.tick(60)
+        dt = clock.tick()/1000
+        print(dt)
 
     pygame.quit()
 
