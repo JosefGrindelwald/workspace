@@ -31,7 +31,7 @@ def main():
 
         # Cap frame rate
         clock.tick(60)
-        dt = clock.tick()
+        dt = clock.tick(60) / 1000 
         print(dt)
 
     pygame.quit()
