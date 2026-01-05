@@ -26,7 +26,7 @@ def main():
         pygame.display.flip()
 
         # FPS begrenzen & Delta Time berechnen
-        dt = clock.tick(60) / 1000
+        dt = clock.tick(59) / 1000
 
     pygame.quit()
 
