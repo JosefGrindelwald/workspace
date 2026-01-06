@@ -24,3 +24,13 @@ class Player(CircleShape):
             self.triangle(),
             LINE_WIDTH
         )
+    def rotate(self, dt , PLAYER_TURN_SPEED):
+        self.rotation += PLAYER_TURN_SPEED * dt
+
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            rotate(dt)
+        if keys[pygame.K_d]:
+            rotate(-dt)
