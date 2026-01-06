@@ -1,7 +1,8 @@
 import pygame
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH
-from logger import log_state
-
+from constants import *
+from logger import *
+from player import *
+from circleshaps import *
 
 def main():
     pygame.init()
@@ -17,6 +18,7 @@ def main():
                 return
 
         screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
 
         # limit the framerate to 60 FPS
