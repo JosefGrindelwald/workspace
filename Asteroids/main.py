@@ -2,7 +2,7 @@ import pygame
 from constants import *
 from logger import *
 from player import *
-from circleshaps import *
+from circleshape import *
 
 def main():
     pygame.init()
