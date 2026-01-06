@@ -1,7 +1,7 @@
 from circleshape import *
 from constants import *
 class player(CircleShape):
-  def __init__(self, x, y, PLAYER_RADIUS)
+  def __init__(self, x, y, PLAYER_RADIUS):
   rotation = 0 
   x = SCREEN_WIDTH / 2
   y = SCREEN_HEIGHT / 2
