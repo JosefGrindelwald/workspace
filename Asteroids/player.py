@@ -3,7 +3,13 @@ import pygame
 from circleshape import *
 from constants import *
 from shot import *
+import os
 
+pygame.mixer.init()
+
+SHOOT_SOUND_PATH = os.path.join("assets", "sounds", "shot.wav")
+
+shoot_sound = pygame.mixer.Sound(SHOOT_SOUND_PATH)
 class Player(CircleShape):
     image = None
     def __init__(self, x, y):
@@ -42,6 +48,7 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)  
         shot_position = self.position + forward * self.radius
         Shot(shot_position.x, shot_position.y, forward)
+        shoot_sound.play()
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
