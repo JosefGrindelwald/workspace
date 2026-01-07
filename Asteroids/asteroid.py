@@ -12,3 +12,5 @@ class Asteroid(CircleShape):
             self.radius,
             LINE_WIDTH
         )
+    def update(self, dt):
+        self.position += (self.velocity * dt)
