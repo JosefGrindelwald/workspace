@@ -5,10 +5,15 @@ from constants import *
 from logger import *
 
 class Asteroid(CircleShape):
-    image = pygame.image.load("assets/Asteroid.png").convert_alpha()
+    image = None
 
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
+
+        if Asteroid.image is None:
+            Asteroid.image = pygame.image.load(
+                "assets/Asteroid.png"
+            ).convert_alpha()
 
         self.rotation = random.uniform(0, 360)
         self.rotation_speed = random.uniform(-60, 60)
