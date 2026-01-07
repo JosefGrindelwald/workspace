@@ -1,4 +1,4 @@
-SPRITE_FRONT_OFFSET = 20
+
 import pygame
 from circleshape import *
 from constants import *
@@ -39,8 +39,8 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * direction * dt
     def shoot(self):
-        forward = pygame.Vector2(0, -1).rotate(self.rotation)
-        shot_position = self.position + forward * SPRITE_FRONT_OFFSET
+        forward = pygame.Vector2(0, -1).rotate(self.rotation)  # oder (0,1) je nach Grafik
+        shot_position = self.position + forward * self.radius
         Shot(shot_position.x, shot_position.y, forward)
     def update(self, dt):
         keys = pygame.key.get_pressed()
