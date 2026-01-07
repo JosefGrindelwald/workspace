@@ -4,6 +4,7 @@ from constants import *
 from shot import *
 
 class Player(CircleShape):
+    image = None
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
 
