@@ -27,7 +27,7 @@ class Player(CircleShape):
         )
         rotated_image = pygame.transform.rotate(
             scaled_image,
-            self.rotation 
+            -self.rotation 
         )
         rect = rotated_image.get_rect(center=self.position)
         screen.blit(rotated_image, rect)
@@ -39,7 +39,7 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * direction * dt
     def shoot(self):
-        forward = pygame.Vector2(0, 1).rotate(self.rotation)  
+        forward = pygame.Vector2(0, -1).rotate(self.rotation)  
         shot_position = self.position + forward * self.radius
         Shot(shot_position.x, shot_position.y, forward)
     def update(self, dt):
