@@ -27,7 +27,7 @@ class Player(CircleShape):
         )
         rotated_image = pygame.transform.rotate(
             scaled_image,
-            self.rotation + SPRITE_ROTATION_OFFSET
+            self.rotation 
         )
         rect = rotated_image.get_rect(center=self.position)
         screen.blit(rotated_image, rect)
