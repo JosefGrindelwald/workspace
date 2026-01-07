@@ -48,9 +48,9 @@ class Player(CircleShape):
         self.cooldown -= dt  # Cooldown runterzählen
 
         if keys[pygame.K_a]:
-            self.rotate(-1, dt)
-        if keys[pygame.K_d]:
             self.rotate(+1, dt)
+        if keys[pygame.K_d]:
+            self.rotate(-1, dt)
         if keys[pygame.K_w]:
             self.move(+1, dt)
         if keys[pygame.K_s]:
