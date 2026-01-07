@@ -21,10 +21,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        for thing in drawable:
-            thing.draw(screen)
+        
 
         screen.fill("black")
+        for thing in drawable:
+            thing.draw(screen)
         pygame.display.flip()
         
         
