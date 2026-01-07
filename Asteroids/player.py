@@ -1,4 +1,4 @@
-SPRITE_ROTATION_OFFSET = -90
+
 import pygame
 from circleshape import *
 from constants import *
