@@ -31,8 +31,8 @@ def main():
         for thing in asteroids:
             if thing.collides_with(Shot) == True :
                 log_event("asteroid_shot")
-                thing.kill() method
-                shot.kill() method
+                thing.kill() 
+                shot.kill() 
                 
 
         for event in pygame.event.get():
