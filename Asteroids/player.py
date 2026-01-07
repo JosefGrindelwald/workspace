@@ -5,9 +5,13 @@ from constants import *
 from shot import *
 import os
 
-pygame.mixer.init()
-
-SHOOT_SOUND_PATH = os.path.join("assets", "sounds", "shot.wav")
+try:
+    pygame.mixer.init()  # Sound-Subsystem starten
+    shoot_sound_path = os.path.join("assets", "sounds", "shot.wav")
+    shoot_sound = pygame.mixer.Sound(shoot_sound_path)
+except pygame.error:
+    print("⚠️ Kein Audio-Gerät gefunden, Sound wird deaktiviert")
+    shoot_sound = None
 
 shoot_sound = pygame.mixer.Sound(SHOOT_SOUND_PATH)
 class Player(CircleShape):
@@ -48,7 +52,8 @@ class Player(CircleShape):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)  
         shot_position = self.position + forward * self.radius
         Shot(shot_position.x, shot_position.y, forward)
-        shoot_sound.play()
+        if shoot_sound:
+            shoot_sound.play()
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
