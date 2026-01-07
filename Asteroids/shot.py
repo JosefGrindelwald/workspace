@@ -7,7 +7,7 @@ class Shot(CircleShape):
         super().__init__(x, y, SHOT_RADIUS)
 
         # Richtung → Geschwindigkeit
-        self.velocity = direction * SHOT_SPEED
+        self.velocity = direction * PLAYER_SHOOT_SPEED
 
     def draw(self, screen):
         pygame.draw.circle(
