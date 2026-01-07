@@ -28,7 +28,7 @@ class Player(CircleShape):
     def rotate(self, direction, dt):
         # direction: +1 (links), -1 (rechts)
         self.rotation += direction * PLAYER_TURN_SPEED * dt
-    def move(self, dt):
+    def move(self, direction, dt):
         unit_vector = pygame.Vector2(0, 1)
         rotated_vector = unit_vector.rotate(self.rotation)
         rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
