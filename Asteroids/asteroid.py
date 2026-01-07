@@ -28,7 +28,6 @@ class Asteroid(CircleShape):
                 direction = pygame.Vector2(0, -1).rotate(angle)
                 position = self.position + direction * new_radius
                 asteroid = Asteroid(position.x, position.y, new_radius)
-                asteroid.velocity = direction* self.velocity*1.2
-
+                asteroid.velocity = direction * self.velocity.length() * 1.2
     def update(self, dt):
         self.position += self.velocity * dt
