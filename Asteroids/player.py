@@ -13,7 +13,6 @@ except pygame.error:
     print("⚠️ Kein Audio-Gerät gefunden, Sound wird deaktiviert")
     shoot_sound = None
 
-shoot_sound = pygame.mixer.Sound(SHOOT_SOUND_PATH)
 class Player(CircleShape):
     image = None
     def __init__(self, x, y):
