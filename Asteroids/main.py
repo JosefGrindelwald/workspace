@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 from logger import *
 from player import *
