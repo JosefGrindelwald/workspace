@@ -38,10 +38,10 @@ def main():
                     asteroid.split()
                     shot.kill()
         for thing in sputniks:
-            if thing.collides_with(player) == True :
-                Sputnik.kill()
-                player_level += 1
-                print(player_level)
+            if thing.collides_with(player):
+                thing.kill()
+                player.level += 1
+                print(player.level)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
