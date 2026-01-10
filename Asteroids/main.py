@@ -39,7 +39,7 @@ def main():
                     shot.kill()
         for thing in sputniks:
             if thing.collides_with(player) == True :
-                sputnik.kill()
+                Sputnik.kill()
                 player_level += 1
                 print(player_level)
 
