@@ -40,8 +40,7 @@ def main():
         for thing in sputniks:
             if thing.collides_with(player):
                 thing.kill()
-                player.level += 1
-                print(player.level)
+                player.level_up()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
