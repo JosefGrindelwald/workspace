@@ -34,7 +34,7 @@ def main():
                 player.invincible = True
                 player.invincible_timer = player.invincible_duration
                 log_event("player_hit")
-            else:
+            if player.lives <= 0:
                 print("Game over!")
                 sys.exit()
         for asteroid in asteroids:
