@@ -53,7 +53,7 @@ def main():
         screen.fill("black")
         for thing in drawable:
             thing.draw(screen)
-        score_text = font.render(f"Score: {player.score}", True, "white")
+        score_text = font.render(f"Score: {player.points}", True, "white")
         screen.blit(score_text, (10, 10))
         pygame.display.flip()
         
