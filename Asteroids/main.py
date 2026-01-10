@@ -37,6 +37,7 @@ def main():
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
+                    player.get_point()
         for thing in sputniks:
             if thing.collides_with(player):
                 thing.kill()
