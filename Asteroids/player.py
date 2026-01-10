@@ -16,6 +16,10 @@ class Player(CircleShape):
             Player.image = pygame.image.load(
                 "assets/Spaceship.png"
             ).convert_alpha()
+        if Player.heart_image is None:
+            Player.heart_image = pygame.image.load(
+                "assets/Heart.png"
+            ).convert_alpha()
 
         self.rotation = 0
         self.cooldown = 0
