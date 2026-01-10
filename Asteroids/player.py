@@ -31,6 +31,9 @@ class Player(CircleShape):
         self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.fire_mode = "single"   
         self.cooldown_bonus = False
+        self.invincible = False
+        self.invincible_timer = 0.0
+        self.invincible_duration = 1.0 
 
 
     def draw(self, screen):
@@ -119,4 +122,8 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE] and self.cooldown <= 0:
             self.shoot()
             self.cooldown = self.get_shoot_cooldown()
+        if self.invincible:
+            self.invincible_timer -= dt
+            if self.invincible_timer <= 0:
+                self.invincible = False
     
