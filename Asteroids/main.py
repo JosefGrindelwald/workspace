@@ -55,6 +55,7 @@ def main():
             thing.draw(screen)
         score_text = font.render(f"Punkte: {player.points}", True, "yellow")
         screen.blit(score_text, (10, 10))
+        player.draw_lives(screen)
         pygame.display.flip()
         
         
