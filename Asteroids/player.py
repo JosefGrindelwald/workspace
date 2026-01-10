@@ -21,6 +21,8 @@ class Player(CircleShape):
         self.cooldown = 0
         self.level = 1
         self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
+        self.fire_mode = "single"   
+        self.cooldown_bonus = False
 
 
     def draw(self, screen):
@@ -42,13 +44,37 @@ class Player(CircleShape):
     def move(self, direction, dt):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * direction * dt
+    def level_up(self):
+        self.level += 1
+        if self.level == 2 and not self.cooldown_bonus:
+            self.base_shoot_cooldown *= 0.6
+            self.cooldown_bonus = True
+        elif self.level == 3:
+            self.fire_mode = "double"
+        elif self.level >= 4:
+            self.fire_mode = "triple"
     def get_shoot_cooldown(self):
-        cooldown = self.base_shoot_cooldown / self.level
-        return max(cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
+        return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def shoot(self):
-        forward = pygame.Vector2(0, -1).rotate(self.rotation)  
-        shot_position = self.position + forward * self.radius
-        Shot(shot_position.x, shot_position.y, forward)
+        forward = pygame.Vector2(0, -1).rotate(self.rotation)
+        right = forward.rotate(90)
+        if self.fire_mode == "single":
+            Shot(
+                self.position.x + forward.x * self.radius,
+                self.position.y + forward.y * self.radius,
+                forward
+            )
+        elif self.fire_mode == "double":
+            offsets = [-8, 8]
+            for offset in offsets:
+                pos = self.position + right * offset
+                Shot(pos.x, pos.y, forward)
+        elif self.fire_mode == "triple":
+            angles = [0, -10, 10]
+            for angle in angles:
+                dir = forward.rotate(angle)
+                pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir)
        
     def update(self, dt):
         keys = pygame.key.get_pressed()
