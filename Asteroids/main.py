@@ -49,6 +49,7 @@ def main():
             if thing.collides_with(player):
                 thing.kill()
                 player.level_up()
+                player.get_point()*100
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
