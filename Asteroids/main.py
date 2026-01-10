@@ -5,6 +5,7 @@ from logger import *
 from player import *
 from circleshape import *
 from asteroidfield import *
+from sputnik import *
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
