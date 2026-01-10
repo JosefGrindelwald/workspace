@@ -33,6 +33,6 @@ class Sputnik(CircleShape):
 
         rect = rotated_image.get_rect(center=self.position)
         screen.blit(rotated_image, rect)
-     def update(self, dt):
+    def update(self, dt):
         self.position += self.velocity * dt
         self.rotation += self.rotation_speed * dt
