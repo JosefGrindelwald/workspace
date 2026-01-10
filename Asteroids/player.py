@@ -19,7 +19,7 @@ class Player(CircleShape):
 
         self.rotation = 0
         self.cooldown = 0
-        self.player_level = 0
+        self.level = 1
         self.shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
 
 
