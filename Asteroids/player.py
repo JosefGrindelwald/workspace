@@ -35,7 +35,6 @@ class Player(CircleShape):
         self.invincible_timer = 0.0
         self.invincible_duration = 1.0 
 
-
     def draw(self, screen):
         size = int(self.radius * 4)
         scaled_image = pygame.transform.scale(
