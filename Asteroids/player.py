@@ -20,7 +20,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.cooldown = 0
         self.level = 1
-        self.shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
+        self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
 
 
     def draw(self, screen):
@@ -42,6 +42,9 @@ class Player(CircleShape):
     def move(self, direction, dt):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * direction * dt
+    def get_shoot_cooldown(self):
+        cooldown = self.base_shoot_cooldown / self.level
+        return max(cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def shoot(self):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)  
         shot_position = self.position + forward * self.radius
@@ -62,5 +65,5 @@ class Player(CircleShape):
 
         if keys[pygame.K_SPACE] and self.cooldown <= 0:
             self.shoot()
-            self.cooldown = self.shoot_cooldown
+            self.cooldown = self.get_shoot_cooldown()
     
