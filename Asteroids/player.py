@@ -23,7 +23,7 @@ class Player(CircleShape):
 
 
     def draw(self, screen):
-        size = int(self.radius * 2)
+        size = int(self.radius * 4)
         scaled_image = pygame.transform.scale(
             Player.image,
             (size, size)
