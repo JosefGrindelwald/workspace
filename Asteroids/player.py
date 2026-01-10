@@ -20,6 +20,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.cooldown = 0
         self.level = 1
+        self.points = 0
         self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.fire_mode = "single"   
         self.cooldown_bonus = False
