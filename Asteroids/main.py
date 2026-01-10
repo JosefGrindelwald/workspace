@@ -13,11 +13,13 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    sputniks = pygame.sprite.Group()
     shots = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     Shot.containers = (updatable, drawable, shots)
+    Sputnik.containers = (updatable, drawable, sputniks)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
     while True:
@@ -34,7 +36,10 @@ def main():
                     log_event("asteroid_shot")
                     asteroid.split()
                     shot.kill()
-                
+        for thing in sputniks:
+            if thing.collides_with(player) == True :
+                sputnik.kill()
+                player_level += 1
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
