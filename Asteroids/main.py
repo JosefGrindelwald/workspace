@@ -40,6 +40,7 @@ def main():
             if thing.collides_with(player) == True :
                 sputnik.kill()
                 player_level += 1
+                print(player_level)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
