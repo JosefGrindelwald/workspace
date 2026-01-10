@@ -74,7 +74,7 @@ class Player(CircleShape):
     def get_shoot_cooldown(self):
         return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def get_point(self, points=1):
-        self.score += points
+        self.points += points
         self.check_extra_life()
 
     def check_extra_life(self):
