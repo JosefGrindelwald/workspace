@@ -45,7 +45,7 @@ class Player(CircleShape):
     def move(self, direction, dt):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * direction * dt
-    def get_pint(self):
+    def get_point(self):
         self.points += 1
     def level_up(self):
         self.level += 1
