@@ -34,7 +34,7 @@ class AsteroidField(pygame.sprite.Sprite):
 
     def spawn(self, radius, position, velocity):
         if random.random() < 0.05:
-            sputnik = Sputnik(position.x, position.y)
+            sputnik = Sputnik(position.x, position.y, SPUTNIK_RADIUS)
             sputnik.velocity = velocity
         else:
             asteroid = Asteroid(position.x, position.y, radius)
