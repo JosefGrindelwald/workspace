@@ -44,6 +44,14 @@ class Player(CircleShape):
         )
         rect = rotated_image.get_rect(center=self.position)
         screen.blit(rotated_image, rect)
+    def draw_lives(self, screen):
+        heart_size = 24  # Größe jedes Herz-Icons (px)
+        spacing = 5      # Abstand zwischen den Herzen
+        x = 10
+        y = 40  # direkt unter Score
+        for i in range(self.lives):
+            heart = pygame.transform.scale(Player.heart_image, (heart_size, heart_size))
+            screen.blit(heart, (x + i * (heart_size + spacing), y))
 
     def rotate(self, direction, dt):
         self.rotation += direction * PLAYER_TURN_SPEED * dt
