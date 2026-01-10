@@ -28,15 +28,16 @@ def main():
     while True:
         log_state()
         updatable.update(dt)
-        if thing.collides_with(player):
-            log_event("player_hit")
-            if player.lives > 0:
-                player.lives -= 1
-                print(f"Leben verloren! Noch {player.lives} Leben")
-                player.position = pygame.Vector2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
-            else:
-                print("Game over!")
-                sys.exit()
+        for thing in asteroids:
+            if thing.collides_with(player):
+                log_event("player_hit")
+                if player.lives > 0:
+                    player.lives -= 1
+                    print(f"Leben verloren! Noch {player.lives} Leben")
+                    player.position = pygame.Vector2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+                else:
+                    print("Game over!")
+                    sys.exit()
         for asteroid in asteroids:
             for shot in shots:
                 if asteroid.collides_with(shot):
