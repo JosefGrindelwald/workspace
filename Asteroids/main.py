@@ -29,12 +29,11 @@ def main():
         log_state()
         updatable.update(dt)
         for thing in asteroids:
-            if thing.collides_with(player):
+            if thing.collides_with(player) and not player.invincible:
+                player.lives -= 1
+                player.invincible = True
+                player.invincible_timer = player.invincible_duration
                 log_event("player_hit")
-                if player.lives > 0:
-                    player.lives -= 1
-                    print(f"Leben verloren! Noch {player.lives} Leben")
-                    player.position = pygame.Vector2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
                 else:
                     print("Game over!")
                     sys.exit()
