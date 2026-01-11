@@ -77,7 +77,7 @@ def main():
             for thing in drawable:
                 thing.draw(screen)
 
-            score_text = font.render(f"Punkte: {player.score}", True, "yellow")
+            score_text = font.render(f"Punkte: {player.points}", True, "yellow")
             screen.blit(score_text, (10, 10))
             player.draw_lives(screen)
 
