@@ -26,9 +26,17 @@ def main():
     sputniks = pygame.sprite.Group()
     shots = pygame.sprite.Group()
     def reset_game():
-        nonlocal player, asteroids, sputniks, shots, updatable, drawable, game_state
+        nonlocal player, game_state
         for group in [asteroids, sputniks, shots, updatable, drawable]:
             group.empty()
+        Player.containers = (updatable, drawable)
+        Asteroid.containers = (asteroids, updatable, drawable)
+        Shot.containers = (updatable, drawable, shots)
+        Sputnik.containers = (updatable, drawable, sputniks)
+        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        AsteroidField()
+        game_state = RUNNING
+
 
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
