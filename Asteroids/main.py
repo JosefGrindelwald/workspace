@@ -25,6 +25,10 @@ def main():
     asteroids = pygame.sprite.Group()
     sputniks = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    def reset_game():
+        nonlocal player, asteroids, sputniks, shots, updatable, drawable, game_state
+        for group in [asteroids, sputniks, shots, updatable, drawable]:
+            group.empty()
 
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
@@ -45,7 +49,7 @@ def main():
 
             if game_state == GAME_OVER and event.type == pygame.MOUSEBUTTONDOWN:
                 if button_rect.collidepoint(event.pos):
-                    return  # Neustart
+                    reset_game()
 
         if game_state == RUNNING:
             updatable.update(dt)
