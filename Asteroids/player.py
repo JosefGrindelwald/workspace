@@ -67,7 +67,7 @@ class Player(CircleShape):
     def level_up(self):
         self.level += 1
         if self.level == 2 and not self.cooldown_bonus:
-            self.base_shoot_cooldown *= 0.6
+            self.base_shoot_cooldown *= 0.8
             self.cooldown_bonus = True
         elif self.level == 3:
             self.fire_mode = "double"
@@ -75,8 +75,10 @@ class Player(CircleShape):
             self.fire_mode = "triple"
         elif self.level == 5:
             self.fire_mode = "super"
-        elif self.level >= 6:
+        elif self.level == 6:
             self.fire_mode = "super_2"
+        elif self.level >= 6:
+            self.fire_mode = "super_3"
     def get_shoot_cooldown(self):
         return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def get_point(self, points=1):
@@ -119,6 +121,12 @@ class Player(CircleShape):
             for angle in angles:
                 dir = forward.rotate(angle)
                 pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir)
+        elif self.fire_mode == "super_3":
+            angles = [0, 0, 0, 0, 0]
+            for angle in angles:
+                dir = forward.rotate(angle)
+                pos = self.position + dir * self.radius*5
                 Shot(pos.x, pos.y, dir)
     def update(self, dt):
         keys = pygame.key.get_pressed()
