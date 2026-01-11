@@ -77,7 +77,7 @@ class Player(CircleShape):
             self.fire_mode = "super"
         elif self.level == 6:
             self.fire_mode = "super_2"
-        elif self.level >= 6:
+        elif self.level >= 7:
             self.fire_mode = "super_3"
     def get_shoot_cooldown(self):
         return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
@@ -126,8 +126,8 @@ class Player(CircleShape):
             angles = [0, 0, 0, 0, 0]
             for angle in angles:
                 dir = forward.rotate(angle)
-                pos = self.position + dir * self.radius*5
-                Shot(pos.x, pos.y, dir)
+                pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir*5)
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
