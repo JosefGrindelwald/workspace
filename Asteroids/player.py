@@ -127,7 +127,7 @@ class Player(CircleShape):
             for angle in angles:
                 dir = forward.rotate(angle)
                 pos = self.position + dir * self.radius
-                Shot(pos.x, pos.y, dir*5)
+                Shot(pos.x, pos.y, dir*2)
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
