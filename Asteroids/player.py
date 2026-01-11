@@ -71,8 +71,12 @@ class Player(CircleShape):
             self.cooldown_bonus = True
         elif self.level == 3:
             self.fire_mode = "double"
-        elif self.level >= 4:
+        elif self.level == 4:
             self.fire_mode = "triple"
+        elif self.level == 5:
+            self.fire_mode = "super"
+        elif self.level >= 6:
+            self.fire_mode = "super_2"
     def get_shoot_cooldown(self):
         return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def get_point(self, points=1):
@@ -83,7 +87,7 @@ class Player(CircleShape):
         while self.points >= self.next_life_threshold:
             self.lives += 1
             print(f"Extra life! Total lives: {self.lives}")
-            self.next_life_threshold *= 10
+            self.next_life_threshold *= 5
     def shoot(self):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         right = forward.rotate(90)
@@ -104,7 +108,18 @@ class Player(CircleShape):
                 dir = forward.rotate(angle)
                 pos = self.position + dir * self.radius
                 Shot(pos.x, pos.y, dir)
-       
+        elif self.fire_mode == "super":
+            angles = [5, -10, 10, -5]
+            for angle in angles:
+                dir = forward.rotate(angle)
+                pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir)
+        elif self.fire_mode == "super_2":
+            angles = [0, 5, -10, 10, -5]
+            for angle in angles:
+                dir = forward.rotate(angle)
+                pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir)
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
