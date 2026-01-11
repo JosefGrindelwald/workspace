@@ -123,7 +123,7 @@ class Player(CircleShape):
                 pos = self.position + dir * self.radius
                 Shot(pos.x, pos.y, dir)
         elif self.fire_mode == "super_3":
-            angles = [0, 0, 0, 0, 0]
+            angles = [0, 5, -10, 10, -5]
             for angle in angles:
                 dir = forward.rotate(angle)
                 pos = self.position + dir * self.radius
