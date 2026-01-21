@@ -27,7 +27,7 @@ class Player(CircleShape):
         self.level = 1
         self.points = 0
         self.lives = 1  
-        self.next_life_threshold = 10
+        self.next_level_threshold = 25
         self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.fire_mode = "single"   
         self.cooldown_bonus = False
@@ -86,7 +86,7 @@ class Player(CircleShape):
     def check_extra_level(self):
         while self.points >= self.next_level_threshold:
             self.level += 1
-            self.next_level_threshold *= 5
+            self.next_level_threshold *= 2
     def shoot(self):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         right = forward.rotate(90)
