@@ -80,7 +80,7 @@ def main():
             for sputnik in sputniks:
                 if sputnik.collides_with(player):
                     sputnik.kill()
-                    live += 1
+                    lives += 1
                     
 
         screen.fill("black")
