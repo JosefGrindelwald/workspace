@@ -75,21 +75,18 @@ class Player(CircleShape):
             self.fire_mode = "triple"
         elif self.level == 5:
             self.fire_mode = "super"
-        elif self.level == 6:
+        elif self.level >= 6:
             self.fire_mode = "super_2"
-        elif self.level >= 7:
-            self.fire_mode = "super_3"
     def get_shoot_cooldown(self):
         return max(self.base_shoot_cooldown, PLAYER_MIN_SHOOT_COOLDOWN)
     def get_point(self, points=1):
         self.points += points
-        self.check_extra_life()
+        self.check_extra_level()
 
-    def check_extra_life(self):
-        while self.points >= self.next_life_threshold:
-            self.lives += 1
-            print(f"Extra life! Total lives: {self.lives}")
-            self.next_life_threshold *= 5
+    def check_extra_level(self):
+        while self.points >= self.next_level_threshold:
+            self.level += 1
+            self.next_level_threshold *= 5
     def shoot(self):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
         right = forward.rotate(90)
