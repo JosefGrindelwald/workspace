@@ -1,0 +1,40 @@
+class UFO(CircleShape):
+    image = None
+
+    def __init__(self, x, y):
+        super().__init__(x, y, radius=40)
+
+        if UFO.image is None:
+            UFO.image = pygame.image.load("assets/UFO.png").convert_alpha()
+
+        self.rotation = 0
+        self.rotation_speed = 30
+        self.velocity = pygame.Vector2(0, 0)
+
+        self.lives = 100
+        self.shoot_cooldown = 0.8
+        self.shoot_timer = 0
+
+    def shoot(self):
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        angles = [-10, 0, 10]
+
+        for angle in angles:
+            direction = forward.rotate(angle)
+            pos = self.position + direction * self.radius
+            Shot(pos.x, pos.y, direction)
+
+    def update(self, dt):
+        self.rotation += self.rotation_speed * dt
+        self.shoot_timer -= dt
+
+        if self.shoot_timer <= 0:
+            self.shoot()
+            self.shoot_timer = self.shoot_cooldown
+
+    def draw(self, screen):
+        size = int(self.radius * 2)
+        image = pygame.transform.scale(UFO.image, (size, size))
+        image = pygame.transform.rotate(image, self.rotation)
+        rect = image.get_rect(center=self.position)
+        screen.blit(image, rect)
