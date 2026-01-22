@@ -48,4 +48,4 @@ class UFO(CircleShape):
             -self.rotation 
         )
         rect = rotated_image.get_rect(center=self.position)
-        screen.blit(rotated_image, rect))
+        screen.blit(rotated_image, rect)
