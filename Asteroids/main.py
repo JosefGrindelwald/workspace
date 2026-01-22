@@ -88,6 +88,23 @@ def main():
                 UFO(SCREEN_WIDTH // 2, 150)
         elif game_state == BOSS_FIGHT:
             updatable.update(dt)
+            for asteroid in asteroids:
+                if asteroid.collides_with(player) and not player.invincible:
+                    player.lives -= 1
+                    player.invincible = True
+                    player.invincible_timer = player.invincible_duration
+                    if player.lives <= 0:
+                        game_state = GAME_OVER
+            for asteroid in asteroids:
+                for shot in shots:
+                    if asteroid.collides_with(shot):
+                        asteroid.split()
+                        shot.kill()
+                        player.get_point()
+            for sputnik in sputniks:
+                if sputnik.collides_with(player):
+                    sputnik.kill()
+                    player.lives += 1
             for ufo in ufos:
                 for shot in shots:
                     if ufo.collides_with(shot):
