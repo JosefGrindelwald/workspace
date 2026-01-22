@@ -30,7 +30,7 @@ class UFO(CircleShape):
                 Shot(pos.x, pos.y, dir, owner="UFO")
 
     def update(self, dt):
-        self.rotation += self.rotation_speed * dt
+        self.rotation -= self.rotation_speed * dt
         self.shoot_timer -= dt
 
         if self.shoot_timer <= 0:
