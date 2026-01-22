@@ -1,3 +1,8 @@
+import pygame
+from circleshape import *
+from constants import *
+from shot import *
+import os
 class UFO(CircleShape):
     image = None
 
