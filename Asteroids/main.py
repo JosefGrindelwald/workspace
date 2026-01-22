@@ -85,14 +85,6 @@ def main():
                     player.lives += 1
             if player.points >= 100 and len(ufos) == 0:
                 game_state = BOSS_FIGHT
-                asteroid_field.kill()
-                asteroid_field = None
-                asteroids.empty()
-                sputniks.empty()
-                for sprite in list(asteroids):
-                    sprite.kill()
-                for sprite in list(sputniks):
-                    sprite.kill()
                 UFO(SCREEN_WIDTH // 2, 150)
         elif game_state == BOSS_FIGHT:
             updatable.update(dt)
