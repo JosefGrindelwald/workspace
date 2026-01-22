@@ -110,6 +110,9 @@ def main():
                     if shot.owner == "PLAYER" and ufo.collides_with(shot):
                         shot.kill()
                         ufo.lives -= 1
+                    if shot.owner == "UFO" and player.collides_with(shot):
+                        shot.kill()
+                        player.lives -= 1
                         if ufo.lives <= 0:
                             ufo.kill()
                             game_state = YOU_WIN
