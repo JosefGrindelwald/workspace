@@ -85,7 +85,7 @@ class Player(CircleShape):
 
     def check_extra_level(self):
         while self.points >= self.next_level_threshold:
-            Player.level_up()
+            Player.level_up(self)
             self.next_level_threshold *= 2
     def shoot(self):
         forward = pygame.Vector2(0, -1).rotate(self.rotation)
