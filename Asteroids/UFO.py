@@ -25,9 +25,9 @@ class UFO(CircleShape):
         angles = [-10, 0, 10]
 
         for angle in angles:
-            direction = forward.rotate(angle)
-            pos = self.position + direction * self.radius
-            Shot(pos.x, pos.y, direction)
+                dir = forward.rotate(angle)
+                pos = self.position + dir * self.radius
+                Shot(pos.x, pos.y, dir)
 
     def update(self, dt):
         self.rotation += self.rotation_speed * dt
