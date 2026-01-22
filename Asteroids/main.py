@@ -8,6 +8,7 @@ from asteroidfield import *
 from sputnik import *
 RUNNING = "running"
 GAME_OVER = "game_over"
+BOSS_FIGHT = "boss_fight"
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -25,6 +26,7 @@ def main():
     asteroids = pygame.sprite.Group()
     sputniks = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    ufos = pygame.sprite.Group()
     def reset_game():
         nonlocal player, game_state
         for group in [asteroids, sputniks, shots, updatable, drawable]:
@@ -33,8 +35,10 @@ def main():
         Asteroid.containers = (asteroids, updatable, drawable)
         Shot.containers = (updatable, drawable, shots)
         Sputnik.containers = (updatable, drawable, sputniks)
+        UFO.containers = (updatable, drawable, ufos)
         player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
         AsteroidField()
+        ufos.empty()
         game_state = RUNNING
 
 
@@ -76,6 +80,32 @@ def main():
                         asteroid.split()
                         shot.kill()
                         player.get_point()
+            if player.points >= 1000 and len(ufos) == 0:
+                game_state = BOSS_FIGHT
+                asteroid_field.kill()
+                asteroids.empty()
+                UFO(SCREEN_WIDTH // 2, 150)
+            if game_state == BOSS_FIGHT:
+                updatable.update(dt)
+                for ufo in ufos:
+                    for shot in shots:
+                        if ufo.collides_with(shot):
+                            shot.kill()
+                            ufo.lives -= 1
+                            if ufo.lives <= 0:
+                                ufo.kill()
+                                game_state = RUNNING
+                                asteroid_field = AsteroidField()
+            if game_state in (RUNNING, BOSS_FIGHT):
+                for thing in drawable:
+                    thing.draw(screen)
+                    score_text = font.render(f"Punkte: {player.points}", True, "yellow")
+                    screen.blit(score_text, (10, 10))
+                    player.draw_lives(screen)
+            if game_state == BOSS_FIGHT:
+                for ufo in ufos:
+                    hp_text = font.render(f"UFO HP: {ufo.lives}", True, "red")
+                    screen.blit(hp_text, (10, 70))
 
             for sputnik in sputniks:
                 if sputnik.collides_with(player):
