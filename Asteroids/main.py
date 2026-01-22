@@ -83,7 +83,7 @@ def main():
                 if sputnik.collides_with(player):
                     sputnik.kill()
                     player.lives += 1
-            if player.points >= 100 and len(ufos) == 0:
+            if player.points >= 1000 and len(ufos) == 0:
                 game_state = BOSS_FIGHT
                 UFO(SCREEN_WIDTH // 2, 150)
         elif game_state == BOSS_FIGHT:
