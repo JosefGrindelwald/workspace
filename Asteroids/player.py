@@ -26,7 +26,7 @@ class Player(CircleShape):
         self.cooldown = 0
         self.level = 1
         self.points = 0
-        self.lives = 1  
+        self.lives = 3  
         self.next_level_threshold = 25
         self.base_shoot_cooldown = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.fire_mode = "single"   
