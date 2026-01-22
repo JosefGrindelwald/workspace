@@ -107,7 +107,7 @@ def main():
                     player.lives += 1
             for ufo in ufos:
                 for shot in shots:
-                    if ufo.collides_with(shot):
+                    if shot.owner == "PLAYER" and ufo.collides_with(shot):
                         shot.kill()
                         ufo.lives -= 1
                         if ufo.lives <= 0:
