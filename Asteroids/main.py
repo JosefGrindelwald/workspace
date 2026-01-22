@@ -110,12 +110,14 @@ def main():
                     if shot.owner == "PLAYER" and ufo.collides_with(shot):
                         shot.kill()
                         ufo.lives -= 1
-                    if shot.owner == "UFO" and player.collides_with(shot):
-                        shot.kill()
-                        player.lives -= 1
                         if ufo.lives <= 0:
                             ufo.kill()
                             game_state = YOU_WIN
+                    if shot.owner == "UFO" and player.collides_with(shot):
+                        shot.kill()
+                        player.lives -= 1
+                        if player.lives <= 0:
+                            game_state = GAME_OVER
         screen.fill("black")
         if game_state in (RUNNING, BOSS_FIGHT):
             for thing in drawable:
