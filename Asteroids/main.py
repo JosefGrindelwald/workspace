@@ -85,6 +85,10 @@ def main():
                 game_state = BOSS_FIGHT
                 asteroid_field.kill()
                 asteroids.empty()
+                sputniks.empty()
+                for sprite in drawable:
+                    if sprite in asteroids or sprite in sputniks:
+                        sprite.kill()
                 UFO(SCREEN_WIDTH // 2, 150)
         elif game_state == BOSS_FIGHT:
             updatable.update(dt)
