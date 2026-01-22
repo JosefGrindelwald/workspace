@@ -13,7 +13,7 @@ class UFO(CircleShape):
             UFO.image = pygame.image.load("assets/UFO.png").convert_alpha()
 
         self.rotation = 0
-        self.rotation_speed = 30
+        self.rotation_speed = -30
         self.velocity = pygame.Vector2(0, 0)
 
         self.lives = 100
@@ -40,6 +40,6 @@ class UFO(CircleShape):
     def draw(self, screen):
         size = int(self.radius * 2)
         image = pygame.transform.scale(UFO.image, (size, size))
-        image = pygame.transform.rotate(image, -self.rotation)
+        image = pygame.transform.rotate(image, self.rotation)
         rect = image.get_rect(center=self.position)
         screen.blit(image, rect)
