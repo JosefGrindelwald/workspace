@@ -10,6 +10,7 @@ from UFO import *
 RUNNING = "running"
 GAME_OVER = "game_over"
 BOSS_FIGHT = "boss_fight"
+YOU_WIN = "you_win"
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -101,9 +102,19 @@ def main():
                         ufo.lives -= 1
                         if ufo.lives <= 0:
                             ufo.kill()
-                            asteroid_field = AsteroidField()
-                            game_state = RUNNING
+                            game_state = YOU_WIN
         screen.fill("black")
+        elif game_state == YOU_WIN:
+        win_text = font.render("YOU WIN!", True, "green")
+        score_text = font.render(f"Final Score: {player.points}", True, "white")
+        screen.blit(
+            win_text,
+            win_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 30))
+        )
+        screen.blit(
+            score_text,
+            score_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 10))
+        )
         if game_state in (RUNNING, BOSS_FIGHT):
             for thing in drawable:
                 thing.draw(screen)
