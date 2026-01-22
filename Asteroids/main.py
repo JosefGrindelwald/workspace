@@ -86,6 +86,7 @@ def main():
             if player.points >= 100 and len(ufos) == 0:
                 game_state = BOSS_FIGHT
                 asteroid_field.kill()
+                asteroid_field = None
                 asteroids.empty()
                 sputniks.empty()
                 for sprite in list(asteroids):
