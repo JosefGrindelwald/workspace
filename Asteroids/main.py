@@ -81,7 +81,7 @@ def main():
                         asteroid.split()
                         shot.kill()
                         player.get_point()
-            if player.points >= 1000 and len(ufos) == 0:
+            if player.points >= 100 and len(ufos) == 0:
                 game_state = BOSS_FIGHT
                 asteroid_field.kill()
                 asteroids.empty()
