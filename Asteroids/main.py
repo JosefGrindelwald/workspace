@@ -6,6 +6,7 @@ from player import *
 from circleshape import *
 from asteroidfield import *
 from sputnik import *
+from UFO import *
 RUNNING = "running"
 GAME_OVER = "game_over"
 BOSS_FIGHT = "boss_fight"
