@@ -48,6 +48,7 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (updatable, drawable, shots)
     Sputnik.containers = (updatable, drawable, sputniks)
+    UFO.containers = (updatable, drawable, ufos)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
@@ -86,9 +87,10 @@ def main():
                 asteroid_field.kill()
                 asteroids.empty()
                 sputniks.empty()
-                for sprite in drawable:
-                    if sprite in asteroids or sprite in sputniks:
-                        sprite.kill()
+                for sprite in list(asteroids):
+                    sprite.kill()
+                for sprite in list(sputniks):
+                    sprite.kill()
                 UFO(SCREEN_WIDTH // 2, 150)
         elif game_state == BOSS_FIGHT:
             updatable.update(dt)
