@@ -12,7 +12,7 @@ class UFO(CircleShape):
         if UFO.image is None:
             UFO.image = pygame.image.load("assets/UFO.png").convert_alpha()
 
-        self.rotation = 0
+        self.rotation = 10
         self.rotation_speed = 30
         self.velocity = pygame.Vector2(0, 0)
 
