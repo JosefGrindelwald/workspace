@@ -13,7 +13,7 @@ class UFO(CircleShape):
             UFO.image = pygame.image.load("assets/UFO.png").convert_alpha()
 
         self.rotation = 0
-        self.rotation_speed = -30
+        self.rotation_speed = 30
         self.velocity = pygame.Vector2(0, 0)
 
         self.lives = 100
@@ -22,7 +22,7 @@ class UFO(CircleShape):
 
     def shoot(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
-        angles = [-10, 0, 10]
+        angles = [-30, -20, -10, 0, 10, 20, 30]
 
         for angle in angles:
                 dir = forward.rotate(angle)
