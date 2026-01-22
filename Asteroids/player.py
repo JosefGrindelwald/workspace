@@ -97,7 +97,7 @@ class Player(CircleShape):
             offsets = [-8, 8]
             for offset in offsets:
                 pos = self.position + right * offset
-                Shot(pos.x, pos.y, dir, owner="PLAYER")
+                Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "triple":
             angles = [0, -10, 10]
             for angle in angles:
