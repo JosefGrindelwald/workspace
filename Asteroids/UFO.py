@@ -30,7 +30,7 @@ class UFO(CircleShape):
                 Shot(pos.x, pos.y, dir, owner="UFO")
 
     def update(self, dt):
-        self.rotation -= self.rotation_speed * dt
+        self.rotation = self.rotation_speed * dt
         self.shoot_timer -= dt
 
         if self.shoot_timer <= 0:
@@ -40,6 +40,6 @@ class UFO(CircleShape):
     def draw(self, screen):
         size = int(self.radius * 2)
         image = pygame.transform.scale(UFO.image, (size, size))
-        image = pygame.transform.rotate(image, self.rotation)
+        image = pygame.transform.rotate(image, -self.rotation)
         rect = image.get_rect(center=self.position)
         screen.blit(image, rect)
