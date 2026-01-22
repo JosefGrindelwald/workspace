@@ -9,9 +9,16 @@ class Shot(CircleShape):
         self.owner = owner
 
     def draw(self, screen):
+        if self.owner == "PLAYER":
+            color = "red"
+        elif self.owner == "UFO":
+            color = "blue"
+        else:
+            color = "white" 
+
         pygame.draw.circle(
             screen,
-            "red",
+            color,
             self.position,
             self.radius,
             LINE_WIDTH
