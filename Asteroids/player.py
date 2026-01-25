@@ -100,28 +100,24 @@ class Player(CircleShape):
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "triple":
             angles = [0, -10, 10]
-            for angle in angles:
-                dir = forward.rotate(angle)
-                pos = self.position + dir * self.radius
-                Shot(pos.x, pos.y, dir, owner="PLAYER")
+             for offset in offsets:
+                pos = self.position + right * offset
+                Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super":
             angles = [5, -10, 10, -5]
-            for angle in angles:
-                dir = forward.rotate(angle)
-                pos = self.position + dir * self.radius
-                Shot(pos.x, pos.y, dir, owner="PLAYER")
+             for offset in offsets:
+                pos = self.position + right * offset
+                Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_2":
             angles = [0, 5, -10, 10, -5]
-            for angle in angles:
-                dir = forward.rotate(angle)
-                pos = self.position + dir * self.radius
-                Shot(pos.x, pos.y, dir, owner="PLAYER")
+             for offset in offsets:
+                pos = self.position + right * offset
+                Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_3":
             angles = [0, 5, -10, 10, -5]
-            for angle in angles:
-                dir = forward.rotate(angle)
-                pos = self.position + dir * self.radius
-                Shot(pos.x, pos.y, dir, owner="PLAYER")
+             for offset in offsets:
+                pos = self.position + right * offset
+                Shot(pos.x, pos.y, forward, owner="PLAYER")
     def update(self, dt):
         keys = pygame.key.get_pressed()
         self.cooldown -= dt  # Cooldown runterzählen
