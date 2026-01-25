@@ -99,22 +99,22 @@ class Player(CircleShape):
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "triple":
-            angles = [0, -10, 10]
+            offsets = [0, -10, 10]
              for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super":
-            angles = [5, -10, 10, -5]
+            offsets = [5, -10, 10, -5]
              for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_2":
-            angles = [0, 5, -10, 10, -5]
+            offsets = [0, 5, -10, 10, -5]
              for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_3":
-            angles = [0, 5, -10, 10, -5]
+            offsets = [0, 5, -10, 10, -5]
              for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
