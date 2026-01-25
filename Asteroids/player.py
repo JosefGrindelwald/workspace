@@ -100,22 +100,22 @@ class Player(CircleShape):
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "triple":
             offsets = [0, -10, 10]
-             for offset in offsets:
+            for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super":
             offsets = [5, -10, 10, -5]
-             for offset in offsets:
+            for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_2":
             offsets = [0, 5, -10, 10, -5]
-             for offset in offsets:
+            for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
         elif self.fire_mode == "super_3":
             offsets = [0, 5, -10, 10, -5]
-             for offset in offsets:
+            for offset in offsets:
                 pos = self.position + right * offset
                 Shot(pos.x, pos.y, forward, owner="PLAYER")
     def update(self, dt):
