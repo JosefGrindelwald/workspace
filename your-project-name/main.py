@@ -2,28 +2,36 @@ import os
 from dotenv import load_dotenv
 from google import genai
 
-# Load environment variables from .env
+# Load environment variables
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
 
-# Check if the API key was found
 if api_key is None:
     raise RuntimeError(
-        "GEMINI_API_KEY not found. Please create a .env file with your API key:\n"
-        "GEMINI_API_KEY='your_api_key_here'"
+        "GEMINI_API_KEY not found. Please set it in a .env file."
     )
 
-# Initialize the Gemini client
+# Create Gemini client
 client = genai.Client(api_key=api_key)
 
-# Define the prompt
 prompt = "Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
 
-# Generate content using the gemini-2.5-flash model
+# Call the Gemini API
 response = client.models.generate_content(
     model="gemini-2.5-flash",
     contents=prompt
 )
 
-# Print the model's response
+# Ensure usage metadata exists
+if response.usage_metadata is None:
+    raise RuntimeError(
+        "No usage metadata returned. The API request may have failed."
+    )
+
+# Print token usage
+print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+
+# Print the response text
+print("Response:")
 print(response.text)
