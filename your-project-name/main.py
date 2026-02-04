@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
 # Load environment variables
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
@@ -33,6 +32,7 @@ client = genai.Client(api_key=api_key)
 # Use the user-provided prompt from command line
 prompt = args.user_prompt
 
+messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
 # Call the Gemini API
 response = client.models.generate_content(
     model="gemini-2.5-flash", contents=messages
