@@ -17,10 +17,18 @@ if api_key is None:
 parser = argparse.ArgumentParser(
     description="Simple command-line interface to Google's Gemini API"
 )
+
 parser.add_argument(
     "user_prompt",
     type=str,
     help="The prompt/question you want to send to Gemini"
+)
+
+# NEW optional verbose flag
+parser.add_argument(
+    "--verbose",
+    action="store_true",
+    help="Enable verbose output"
 )
 
 # Parse command line arguments
@@ -29,13 +37,16 @@ args = parser.parse_args()
 # Create Gemini client
 client = genai.Client(api_key=api_key)
 
-# Use the user-provided prompt from command line
 prompt = args.user_prompt
 
-messages = [types.Content(role="user", parts=[types.Part(text=args.user_prompt)])]
+messages = [
+    types.Content(role="user", parts=[types.Part(text=prompt)])
+]
+
 # Call the Gemini API
 response = client.models.generate_content(
-    model="gemini-2.5-flash", contents=messages
+    model="gemini-2.5-flash",
+    contents=messages
 )
 
 # Ensure usage metadata exists
@@ -44,10 +55,13 @@ if response.usage_metadata is None:
         "No usage metadata returned. The API request may have failed."
     )
 
-# Print token usage
-print(f"Prompt tokens:  {response.usage_metadata.prompt_token_count}")
-print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+# VERBOSE OUTPUT
+if args.verbose:
+    print(f"User prompt: {prompt}")
+    print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+    print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
-# Print the response text
+# Always print response text
 print("\nResponse:")
 print(response.text)
+
