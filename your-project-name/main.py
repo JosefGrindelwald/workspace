@@ -3,6 +3,7 @@ import argparse
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from prompts import system_prompt
 
 # Load environment variables
 load_dotenv()
@@ -46,8 +47,12 @@ messages = [
 # Call the Gemini API
 response = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents=messages
+    contents=messages,
+    config=types.GenerateContentConfig(
+        system_instruction=system_prompt
+    ),
 )
+
 
 # Ensure usage metadata exists
 if response.usage_metadata is None:
