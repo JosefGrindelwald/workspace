@@ -49,7 +49,8 @@ response = client.models.generate_content(
     model="gemini-2.5-flash",
     contents=messages,
     config=types.GenerateContentConfig(
-        system_instruction=system_prompt
+        system_instruction=system_prompt,
+        tools=[available_functions],
     ),
 )
 
@@ -68,5 +69,12 @@ if args.verbose:
 
 # Always print response text
 print("\nResponse:")
-print(response.text)
+if response.function_calls:
+    for function_call in response.function_calls:
+        print(
+            f"Calling function: {function_call.name}({function_call.args})"
+        )
+else:
+    print(response.text)
+
 
