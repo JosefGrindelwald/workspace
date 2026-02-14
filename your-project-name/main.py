@@ -69,11 +69,35 @@ if args.verbose:
 
 # Always print response text
 print("\nResponse:")
+from call_function import call_function
+
+function_results = []
+
 if response.function_calls:
     for function_call in response.function_calls:
-        print(
-            f"Calling function: {function_call.name}({function_call.args})"
+
+        function_call_result = call_function(
+            function_call, verbose=args.verbose
         )
+
+        # Validate structure
+        if not function_call_result.parts:
+            raise Exception("Function call result has no parts")
+
+        function_response = function_call_result.parts[0].function_response
+        if function_response is None:
+            raise Exception("Missing function_response")
+
+        if function_response.response is None:
+            raise Exception("Missing function response content")
+
+        function_results.append(function_call_result.parts[0])
+
+        if args.verbose:
+            print(
+                f"-> {function_response.response}"
+            )
+
 else:
     print(response.text)
 
