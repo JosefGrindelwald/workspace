@@ -30,8 +30,7 @@ def run_python_file(working_directory, file_path, args=None):
             return f'Error: "{file_path}" is not a Python file'
 
         # Build command
-        command = ["python", absolute_file_path]
-
+        command = ["uv", "run", absolute_file_path]
         if args:
             command.extend(args)
 
