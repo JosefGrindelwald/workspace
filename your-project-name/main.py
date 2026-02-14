@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from prompts import system_prompt
+from call_function import call_function
 from call_function import available_functions
 # Load environment variables
 load_dotenv()
@@ -69,7 +70,6 @@ if args.verbose:
 
 # Always print response text
 print("\nResponse:")
-from call_function import call_function
 
 function_results = []
 
