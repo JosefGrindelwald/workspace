@@ -93,10 +93,14 @@ if response.function_calls:
 
         function_results.append(function_call_result.parts[0])
 
+        result_data = function_response.response
         if args.verbose:
-            print(
-                f"-> {function_response.response}"
-            )
+            print(f"-> {result_data}")
+        if isinstance(result_data, dict) and "result" in result_data:
+            print(result_data["result"])
+        elif isinstance(result_data, dict) and "error" in result_data:
+            print(result_data["error"])
+
 
 else:
     print(response.text)
