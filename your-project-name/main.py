@@ -3,10 +3,12 @@ import argparse
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+
 from prompts import system_prompt
-from call_function import call_function
-from call_function import available_functions
-# Load environment variables
+from call_function import call_function, available_functions
+
+
+# ---- Load API key ----
 load_dotenv()
 api_key = os.environ.get("GEMINI_API_KEY")
 
@@ -15,7 +17,8 @@ if api_key is None:
         "GEMINI_API_KEY not found. Please set it in a .env file."
     )
 
-# Create argument parser
+
+# ---- CLI arguments ----
 parser = argparse.ArgumentParser(
     description="Simple command-line interface to Google's Gemini API"
 )
@@ -26,17 +29,16 @@ parser.add_argument(
     help="The prompt/question you want to send to Gemini"
 )
 
-# NEW optional verbose flag
 parser.add_argument(
     "--verbose",
     action="store_true",
     help="Enable verbose output"
 )
 
-# Parse command line arguments
 args = parser.parse_args()
 
-# Create Gemini client
+
+# ---- Create Gemini client ----
 client = genai.Client(api_key=api_key)
 
 prompt = args.user_prompt
@@ -45,7 +47,14 @@ messages = [
     types.Content(role="user", parts=[types.Part(text=prompt)])
 ]
 
-# Call the Gemini API
+# ---- Initial output ----
+if args.verbose:
+    print(f"User prompt: {prompt}")
+
+print("\nResponse:")
+
+
+# ---- AGENT LOOP ----
 for _ in range(20):
 
     response = client.models.generate_content(
@@ -57,12 +66,17 @@ for _ in range(20):
         ),
     )
 
-    # ---- Add model responses to history ----
+    # ---- Verbose token usage ----
+    if args.verbose and response.usage_metadata:
+        print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+        print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+
+    # ---- Add model replies to conversation ----
     if response.candidates:
         for candidate in response.candidates:
             messages.append(candidate.content)
 
-    # ---- If model wants to call functions ----
+    # ---- If model wants to call tools ----
     if response.function_calls:
 
         function_responses = []
@@ -74,6 +88,7 @@ for _ in range(20):
                 verbose=args.verbose
             )
 
+            # ---- Validate structure ----
             if not function_call_result.parts:
                 raise Exception("Function call result has no parts")
 
@@ -86,7 +101,7 @@ for _ in range(20):
 
             function_responses.append(function_call_result.parts[0])
 
-            # print tool output immediately
+            # ---- Print tool output immediately ----
             result_data = function_response.response
 
             if args.verbose:
@@ -98,22 +113,21 @@ for _ in range(20):
                 elif "error" in result_data:
                     print(result_data["error"])
 
-        # ---- Give tool results back to model ----
+        # ---- Give tool outputs back to model ----
         messages.append(
             types.Content(role="user", parts=function_responses)
         )
 
-        # continue loop for next reasoning step
         continue
 
-    # ---- Final response ----
+    # ---- Final response from model ----
     else:
         print("\nFinal response:")
         print(response.text)
         break
 
+# ---- Safety stop ----
 else:
     print("Agent stopped: maximum iterations reached.")
     exit(1)
-
 
